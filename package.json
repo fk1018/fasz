@@ -11,8 +11,6 @@
   },
   "scripts": {
     "start": "electron .",
-    "start-lin-exe": "./fasz-linux-x64/fasz",
-    "compile-lin": "electron-packager ./dist fasz",
-    "compile-win": "electron-packager ./dist fasz --platform=win32 --arch=x64"
+    "compile": "electron-packager ./dist fasz"
   }
 }
