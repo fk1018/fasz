@@ -1,0 +1,11 @@
+{
+  "name": "fasz",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "fasz",
+  "license": "none",
+  "dependencies": {
+    "electron": "^7.1.2",
+    "puppeteer": "^1.20.0"
+  }
+}
