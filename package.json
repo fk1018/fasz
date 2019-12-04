@@ -11,6 +11,6 @@
   },
   "scripts": {
     "start": "electron .",
-    "compile": "electron-packager ./dist fasz"
+    "compile": "electron-packager ./dist fasz --overwrite"
   }
 }
