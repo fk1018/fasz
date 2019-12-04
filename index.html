@@ -1,74 +1,97 @@
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>fasz</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
-  </head>
-  <body>
-    <h1>FASZ</h1>
-    </br>
-    <input type="text" placeholder="site url" id="siteInput"/> 
-    <label for="siteId">Site</label>
-    </br>
-    <input type="number" id="windowsPerProxy"/>
-    <label for="windowsPerProxy">Browser Windows Per Proxy</label>
-    <textarea placeholde="place proxies here" id="proxyListTextArea" rows="10" columns="40"></textarea>
-    <label for="proxyListTextArea">Proxy List</label>
-    </br>
-    <button id="createBrowsers">Create Browsers</button>
-    <script>
-      const puppeteer = require('puppeteer');
-      const createButton = document.getElementById('createBrowsers');
-      const siteUrlInput = document.getElementById('siteInput');
-      const proxyListTextArea = document.getElementById('proxyListTextArea'); 
-      const browserWindowsPerProxyInput = document.getElementById('windowsPerProxy');
-      const browserWindows = new Map();
-      createButton.onclick = createBrowsers;
-      function createBrowsers() {
-        let targetSite = getSiteUrl();
-        let proxyList = getProxyList();
-        let browerWindowsPerProxy = getBrowserWindowsPerProxy();
-        proxyList.forEach((proxy)=>{
-          const proxyValues = proxy.split(':');
-          const uri = `${proxyValues[0]}:${proxyValues[1]}`;
-          const userName = proxyValues[2];
-          const password = proxyValues[3];
-          const browserData = {
-            targetSite,
-            url:uri,
-            userName,
-            password
-          }
-          for(let i =0;i<browerWindowsPerProxy;i++){
-            openBrowser(browserData);
-          }
-        });
-      }
-      function getSiteUrl(){
-        return siteUrlInput.value.trim();
-      }
-      function getProxyList(){
-        return proxyListTextArea.value.trim().split('\n');
-      }
-      function getBrowserWindowsPerProxy(){
-        return browserWindowsPerProxyInput.value;
-      }
-      async function openBrowser(d){
-        const browser = await puppeteer.launch({
-          args: [
-            `--proxy-server=${d.url}`
-          ],
-          headless:false
-        });
 
-        const page = await browser.newPage();
-        await page.authenticate({
-          username: d.userName,
-          password: d.password
-        });
+<head>
+  <meta charset="UTF-8">
+  <title>fasz</title>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
 
-        await page.goto(d.targetSite);
+<body>
+  <h1>FASZ</h1>
+  </br>
+  <input type="text" placeholder="site url" id="siteInput" />
+  <label for="siteId">Site</label>
+  </br>
+  <input type="number" id="windowsPerProxy" />
+  <label for="windowsPerProxy">Browser Windows Per Proxy</label>
+  <textarea placeholde="place proxies here" id="proxyListTextArea" rows="10" columns="40"></textarea>
+  <label for="proxyListTextArea">Proxy List</label>
+  <textarea placeholde="place cookies here" id="cookiesTextArea" rows="10" columns="40"></textarea>
+  <label for="cookiesTextArea">Cookies</label>
+  </br>
+  <button id="createBrowsers">Create Browsers</button>
+  <script>
+    const puppeteer = require('puppeteer');
+    const createButton = document.getElementById('createBrowsers');
+    const siteUrlInput = document.getElementById('siteInput');
+    const proxyListTextArea = document.getElementById('proxyListTextArea');
+    const browserWindowsPerProxyInput = document.getElementById('windowsPerProxy');
+    const cookiesListTextArea = document.getElementById('cookiesTextArea');
+    const browserWindows = new Map();
+    createButton.onclick = createBrowsers;
+    function createBrowsers() {
+      const targetSite = getSiteUrl();
+      const proxyList = getProxyList();
+      const browerWindowsPerProxy = getBrowserWindowsPerProxy();
+      const cookies = getCookies();
+      proxyList.forEach((proxy) => {
+        const proxyValues = proxy.split(':');
+        const uri = `${proxyValues[0]}:${proxyValues[1]}`;
+        const userName = proxyValues[2];
+        const password = proxyValues[3];
+        const browserData = {
+          targetSite,
+          url: uri,
+          userName,
+          password,
+          cookies
+        }
+        for (let i = 0; i < browerWindowsPerProxy; i++) {
+          openBrowser(browserData);
+        }
+      });
+    }
+    function getSiteUrl() {
+      return siteUrlInput.value.trim();
+    }
+    function getProxyList() {
+      return proxyListTextArea.value.trim().split('\n');
+    }
+    function getBrowserWindowsPerProxy() {
+      return browserWindowsPerProxyInput.value;
+    }
+    function getCookies() {
+      const cookies = cookiesListTextArea.value;
+      let arayOfCookies = [];
+      try {
+        arayOfCookies = JSON.parse(cookies.trim()) 
       }
-    </script>
-  </body>
+      catch (error) {
+        console.error(error);
+      }
+      return arayOfCookies ;
+    }
+    async function openBrowser(d) {
+      const browser = await puppeteer.launch({
+        args: [
+          `--proxy-server=${d.url}`
+        ],
+        headless: false
+      });
+
+      const page = await browser.newPage();
+      await page.authenticate({
+        username: d.userName,
+        password: d.password
+      });
+      if(d.cookies.length){
+        await page.setCookie(...d.cookies);
+      } 
+      await page.goto(d.targetSite,{
+                timeout: 30000000
+            });
+    }
+  </script>
+</body>
+
 </html>
