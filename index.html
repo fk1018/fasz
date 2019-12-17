@@ -9,16 +9,128 @@
 <body>
   <h1>FASZ</h1>
   </br>
+  <h2>Task Info</h2>
   <input type="text" placeholder="site url" id="siteInput" />
   <label for="siteId">Site</label>
   </br>
   <input type="number" id="windowsPerProxy" />
   <label for="windowsPerProxy">Browser Windows Per Proxy</label>
-  <textarea placeholde="place proxies here" id="proxyListTextArea" rows="10" columns="40"></textarea>
+  <textarea placeholder="place proxies here" id="proxyListTextArea" rows="10" columns="40"></textarea>
   <label for="proxyListTextArea">Proxy List</label>
-  <textarea placeholde="place cookies here" id="cookiesTextArea" rows="10" columns="40"></textarea>
+  <textarea placeholder="place cookies here" id="cookiesTextArea" rows="10" columns="40"></textarea>
   <label for="cookiesTextArea">Cookies</label>
   </br>
+  <input type="checkbox" id="isYeezySupplyCheckBox" /><label for="isYeezySupplyCheckBox">Are you targeting
+    yeezysupply</label>
+  <h2>Product Info</h2>
+  <input type="text" placeholder="product id" id="productIdInput" value="FV6125" /><label for="productIdInput">Product
+    ID</label>
+  <select id="sizeSelect">
+    <option></option>
+    <option value="530">4</option>
+    <option value="540">4.5</option>
+    <option value="550">5</option>
+    <option value="560">5.5</option>
+    <option value="570">6</option>
+    <option value="580">6.5</option>
+    <option value="590">7</option>
+    <option value="600">7.5</option>
+    <option value="610">8</option>
+    <option value="620">8.5</option>
+    <option value="630">9</option>
+    <option value="640">9.5</option>
+    <option value="650">10</option>
+    <option value="660">10.5</option>
+    <option value="670">11</option>
+    <option value="680">11.5</option>
+    <option value="690">12</option>
+    <option value="700">12.5</option>
+    <option value="710">13</option>
+    <option value="730">14</option>
+  </select>
+  <label for="citysizeSelect">size</label <h2>Shipping</h2>
+  <input type="text" placeholder="First Name" id="firstNameInput" value="fredrick" /><label for="firstNameInput">First
+    Name</label>
+  <input type="text" placeholder="Last Name" id="lastNameInput" value="khoury" /><label for="lastNameInput">Last
+    Name</label>
+  <input type="text" placeholder="Address1" id="addressOneInput" value="2005 molton ct" /><label
+    for="addressOneInput">Address1</label>
+  <input type="text" placeholder="Address2" id="addressTwoInput" value="apt 4" /><label
+    for="addressTwoInput">Address2</label>
+  <input type="text" placeholder="City" id="cityInput" value="birmingham" /><label for="cityInput">City</label>
+  <select id="stateSelect">
+    <option></option>
+    <option>AA Military</option>
+    <option>AE Military</option>
+    <option>AP Military</option>
+    <option>Alabama</option>
+    <option>Alaska</option>
+    <option>Arizona</option>
+    <option>Arkansas</option>
+    <option>California</option>
+    <option>Colorado</option>
+    <option>Connecticut</option>
+    <option>Delaware</option>
+    <option>District Of Columbia</option>
+    <option>Florida</option>
+    <option>Georgia</option>
+    <option>Hawaii</option>
+    <option>Idaho</option>
+    <option>Illinois</option>
+    <option>Indiana</option>
+    <option>Iowa</option>
+    <option>Kansas</option>
+    <option>Kentucky</option>
+    <option>Louisiana</option>
+    <option>Maine</option>
+    <option>Maryland</option>
+    <option>Massachusetts</option>
+    <option>Michigan</option>
+    <option>Minnesota</option>
+    <option>Mississippi</option>
+    <option>Missouri</option>
+    <option>Montana</option>
+    <option>Nebraska</option>
+    <option>Nevada</option>
+    <option>New Hampshire</option>
+    <option>New Jersey</option>
+    <option>New Mexico</option>
+    <option>New York</option>
+    <option>North Carolina</option>
+    <option>North Dakota</option>
+    <option>Ohio</option>
+    <option>Oklahoma</option>
+    <option>Oregon</option>
+    <option>Pennsylvania</option>
+    <option>Rhode Island</option>
+    <option>South Carolina</option>
+    <option>South Dakota</option>
+    <option>Tennessee</option>
+    <option>Texas</option>
+    <option>Utah</option>
+    <option>Vermont</option>
+    <option>Virginia</option>
+    <option>Washington</option>
+    <option>West Virginia</option>
+    <option>Wisconsin</option>
+    <option>Wyoming</option>
+  </select>
+  <label for="stateSelect">State</label>
+  <input type="text" placeholder="Zip Code" id="zipInput" value="35209" /><label for="zipInput">Zip Code</label>
+  <input type="text" placeholder="Phone Number" id="phoneInput" value="2052406222" /><label for="phoneInput">Phone
+    Number</label>
+  <input type="text" placeholder="email@email.com" id="emailInput" value="fredk1018@gmail.com" /><label
+    for="phoneInput">e-mail</label>
+  <h2>Payment info</h2>
+  <input type="text" placeholder="Credit Card Number" id="ccNumberInput" value="4444 3333 2222 1111" /><label
+    for="ccNumberInput">Credit Card
+    Number</label>
+  <input type="text" placeholder="Name On Card" id="nameOnCardInput" value="fredrick khoury" /><label
+    for="nameOnCardInput"> Name On
+    Card</label>
+  <input type="text" placeholder="02 / 03" id="ccExpirationDateInput" value="03 / 22" /><label
+    for="ccExpiationDateInput"></label>
+  <input type="text" placeholder="CVV" id="ccCVVInput" value="321" /><label for="ccCVVInput">CVV</label>
   <button id="createBrowsers">Create Browsers</button>
   <script>
     const puppeteer = require('puppeteer');
@@ -27,6 +139,23 @@
     const proxyListTextArea = document.getElementById('proxyListTextArea');
     const browserWindowsPerProxyInput = document.getElementById('windowsPerProxy');
     const cookiesListTextArea = document.getElementById('cookiesTextArea');
+    const isYeezySupplyCheckBox = document.getElementById('isYeezySupplyCheckBox');
+    const productIdInput = document.getElementById('productIdInput');
+    const sizeSelect = document.getElementById('sizeSelect');
+    const firstNameInput = document.getElementById('firstNameInput');
+    const lastNameInput = document.getElementById('lastNameInput');
+    const addressOneInput = document.getElementById('addressOneInput');
+    const addressTwoInput = document.getElementById('addressTwoInput');
+    const cityInput = document.getElementById('cityInput');
+    const stateSelect = document.getElementById('stateSelect');
+    const zipInput = document.getElementById('zipInput');
+    const phoneInput = document.getElementById('phoneInput');
+    const ccNumberInput = document.getElementById('ccNumberInput');
+    const nameOnCardInput = document.getElementById('nameOnCardInput');
+    const ccExpirationDateInput = document.getElementById('ccExpirationDateInput');
+    const ccCVVInput = document.getElementById('ccCVVInput');
+    const emailInput = document.getElementById('emailInput');
+
     const browserWindows = new Map();
     createButton.onclick = createBrowsers;
     function createBrowsers() {
@@ -34,7 +163,25 @@
       const proxyList = getProxyList();
       const browerWindowsPerProxy = getBrowserWindowsPerProxy();
       const cookies = getCookies();
-      proxyList.forEach((proxy) => {
+      const isYeezySupply = getIsYeezySupply();
+      const shippingAndBilling = {
+        productID: getProductId(),
+        shoeSize: getSize(),
+        firstName: getFirstName(),
+        lastName: getLastName(),
+        addressOne: getAddressOne(),
+        addressTwo: getAddressTwo(),
+        city: getCity(),
+        state: getState(),
+        email: getEmail(),
+        zip: getZip(),
+        phoneNumber: getPhone(),
+        cardNumber: getCCNumber(),
+        nameOnCard: getNameOnCard(),
+        cardCVV: getCCCVV(),
+        cardExpirationDate: getCCExpirationDate()
+      };
+      proxyList.forEach(async (proxy) => {
         const proxyValues = proxy.split(':');
         const uri = `${proxyValues[0]}:${proxyValues[1]}`;
         const userName = proxyValues[2];
@@ -44,10 +191,12 @@
           url: uri,
           userName,
           password,
-          cookies
+          cookies,
+          isYeezySupply,
+          shippingAndBilling
         }
         for (let i = 0; i < browerWindowsPerProxy; i++) {
-          openBrowser(browserData);
+          await openBrowser(browserData);
         }
       });
     }
@@ -62,34 +211,104 @@
     }
     function getCookies() {
       const cookies = cookiesListTextArea.value;
-      let arayOfCookies = [];
-      try {
-        arayOfCookies = JSON.parse(cookies.trim()) 
+      const arrayOfCookies = [];
+      if (cookies.length) {
+        try {
+          arrayOfCookies = JSON.parse(cookies.trim())
+        }
+        catch (error) {
+          console.error(error);
+        }
       }
-      catch (error) {
-        console.error(error);
-      }
-      return arayOfCookies ;
+      return arrayOfCookies;
     }
+
+    function getIsYeezySupply() {
+      return isYeezySupplyCheckBox.checked;
+    }
+
+    function getProductId() {
+      return productIdInput.value;
+    }
+    function getSize() {
+      return sizeSelect.value;
+    }
+    function getFirstName() {
+      return firstNameInput.value;
+    }
+    function getLastName() {
+      return lastNameInput.value;
+    }
+    function getAddressOne() {
+      return addressOneInput.value;
+    }
+    function getAddressTwo() {
+      return addressTwoInput.value;
+    }
+    function getCity() {
+      return cityInput.value;
+    }
+    function getState() {
+      return stateSelect.value;
+    }
+    function getZip() {
+      return zipInput.value;
+    }
+    function getPhone() {
+      return phoneInput.value;
+    }
+    function getEmail() {
+      return emailInput.value;
+    }
+    function getCCNumber() {
+      return ccNumberInput.value;
+    }
+    function getNameOnCard() {
+      return nameOnCardInput.value;
+    }
+    function getCCExpirationDate() {
+      return ccExpirationDateInput.value;
+    }
+    function getCCCVV() {
+      return ccCVVInput.value;
+    }
+
     async function openBrowser(d) {
-      const browser = await puppeteer.launch({
+      const opts = {
         args: [
-          `--proxy-server=${d.url}`
+          `--proxy-server=${d.url}`,
         ],
         headless: false
-      });
+      }
+      const browser = await puppeteer.launch(opts);
 
       const page = await browser.newPage();
       await page.authenticate({
         username: d.userName,
         password: d.password
       });
-      if(d.cookies.length){
-        await page.setCookie(...d.cookies);
-      } 
-      await page.goto(d.targetSite,{
-                timeout: 30000000
-            });
+
+      if (d.isYeezySupply) {
+        yeezysupply(d.shippingAndBilling, page);
+      } else {
+        if (d.cookies.length) {
+          await page.setCookie(...d.cookies);
+        }
+        await page.goto(d.targetSite, {
+          timeout: 30000000
+        });
+      }
+    }
+    //FV6125_530 starts here + 10 intervals size 4 smallesst 14 largest
+    function yeezysupply(siteInfo, page) {
+      (async () => {
+
+        const yzurl = `https://www.yeezysupply.com/product/${siteInfo.productID}`;
+        await page.goto(yzurl, {
+          timeout: 30000000
+        })
+        
+      })()
     }
   </script>
 </body>
